@@ -25,4 +25,5 @@ export class PixabayAPI {
       throw new Error(err.message);
     }
   }
+
 }
