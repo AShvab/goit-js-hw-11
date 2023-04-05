@@ -4,8 +4,8 @@ import '../styles.css';
 import { PixabayAPI } from './pixabayAPI';
 import { createGalleryCard } from './createGalleryCard';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const searchFormEl = document.querySelector('.search-form');
 const galleryListEl = document.querySelector('.gallery');
@@ -21,10 +21,13 @@ const handleSearchFormSubmit = async event => {
 
   try {
     clearSearchForm();
+    pixabayAPI.page = 1;
     const { data } = await pixabayAPI.fetchPhotos();
 
     if (!data.hits.length) {
-      Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+      Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
       return;
     }
 
@@ -35,7 +38,6 @@ const handleSearchFormSubmit = async event => {
 
     const totalHits = data.totalHits;
     
-
     galleryListEl.innerHTML = createGalleryCard(data.hits);
     Notify.success(`Hooray! We found ${totalHits} images.`);
     lightbox.refresh();
@@ -45,11 +47,12 @@ const handleSearchFormSubmit = async event => {
     } else {
       loadMoreBtnEl.classList.remove('is-hidden');
     }
-    if (galleryListEl.querySelectorAll('.photo-card').length >= data.totalHits) {
+    if (
+      galleryListEl.querySelectorAll('.photo-card').length >= data.totalHits
+    ) {
       loadMoreBtnEl.classList.add('is-hidden');
       Notify.info("We're sorry, but you've reached the end of search results.");
     }
-
   } catch (err) {
     Notify.failure('Something wrong');
   }
@@ -61,20 +64,21 @@ const handleLoadMoreBtnClick = async () => {
   try {
     const { data } = await pixabayAPI.fetchPhotos();
 
-    if (!data.hits.length ) {
+    if (!data.hits.length) {
       loadMoreBtnEl.classList.add('is-hidden');
-      Notify.info("We're sorry, but you've reached the end of search results.");      
+      Notify.info("We're sorry, but you've reached the end of search results.");
       return;
     }
 
     galleryListEl.insertAdjacentHTML('beforeend', createGalleryCard(data.hits));
     lightbox.refresh();
 
-    if (galleryListEl.querySelectorAll('.photo-card').length >= data.totalHits) {
+    if (
+      galleryListEl.querySelectorAll('.photo-card').length >= data.totalHits
+    ) {
       loadMoreBtnEl.classList.add('is-hidden');
       Notify.info("We're sorry, but you've reached the end of search results.");
     }
-
   } catch (err) {
     Notify.failure('Something wrong');
   }
