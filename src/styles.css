@@ -8,11 +8,13 @@ body {
     Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
   color: #2a2a2a;
-  background-color: rgb(235, 254, 247);
+  background-color: rgb(203, 250, 232);
 }
 
 .container {
   background-color: rgb(197, 67, 220);
+  /* background-image: url("https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4wB6Y?ver=db88"); */
+  
   padding: 5px;
   position: fixed;
   left: 0;
@@ -23,7 +25,7 @@ body {
 
 .search-form {
     display: flex;
-    width: 600px;
+    width: 500px;
     margin: 0 auto;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -75,16 +77,21 @@ body {
   }
   
   .search-form button:hover {
-    background-color: #14743c;
-    border: none;
+    background-color: #23b460;   
   }
+  
   .load-more:hover {
-    background-color: #14743c;
+    background-color: #23b460;
+    box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.3);
   }
   
   
   .search-form input:focus {
     outline: none;
+  }
+
+  .photo-card:hover{
+    box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.3);
   }
 
   .gallery {
@@ -97,7 +104,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
-   
+    
   }
 
   .info {
@@ -106,10 +113,10 @@ body {
    justify-content: space-around;
    align-items: center;
    gap: 10px;
-   border: 1px solid rgb(197, 67, 220);
-   border-bottom-left-radius: 10px;
-   border-bottom-right-radius: 10px;
-   background-color: rgba(248, 225, 247, 0.758);
+   /* border: 1px solid rgb(197, 67, 220); */
+   /* border-bottom-left-radius: 10px;
+   border-bottom-right-radius: 10px; */
+   background-color: rgba(249, 215, 247, 0.553);
   }
   
 
@@ -117,7 +124,8 @@ body {
     display: block;
     width: 100%;
     height: 200px;
-    object-fit: cover;    
+    object-fit: cover;  
+      
   }
 
   .info-item { 
