@@ -1,5 +1,7 @@
 'use strict';
 import axios from 'axios';
+// import Spinner from './spinner';
+// const spinner = new Spinner();
 
 export class PixabayAPI {
   #BASE_URL = 'https://pixabay.com/api/';

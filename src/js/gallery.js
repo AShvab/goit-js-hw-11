@@ -6,6 +6,8 @@ import { createGalleryCard } from './createGalleryCard';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import Spinner from './spinner';
+const spinner = new Spinner();
 
 const searchFormEl = document.querySelector('.search-form');
 const galleryListEl = document.querySelector('.gallery');
@@ -20,6 +22,7 @@ const handleSearchFormSubmit = async event => {
   pixabayAPI.query = searchQuery;
 
   try {
+    spinner.enable();
     clearSearchForm();
     pixabayAPI.page = 1;
     const { data } = await pixabayAPI.fetchPhotos();
@@ -53,7 +56,9 @@ const handleSearchFormSubmit = async event => {
       loadMoreBtnEl.classList.add('is-hidden');
       Notify.info("We're sorry, but you've reached the end of search results.");
     }
+    spinner.disable();
   } catch (err) {
+    spinner.disable();
     Notify.failure('Something wrong');
   }
 };
@@ -62,6 +67,7 @@ const handleLoadMoreBtnClick = async () => {
   pixabayAPI.page += 1;
 
   try {
+    spinner.enable();
     const { data } = await pixabayAPI.fetchPhotos();
 
     if (!data.hits.length) {
@@ -79,7 +85,9 @@ const handleLoadMoreBtnClick = async () => {
       loadMoreBtnEl.classList.add('is-hidden');
       Notify.info("We're sorry, but you've reached the end of search results.");
     }
+    spinner.disable();
   } catch (err) {
+    spinner.disable();
     Notify.failure('Something wrong');
   }
 };
